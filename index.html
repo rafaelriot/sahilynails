@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahily Oropeza | Luxury Studio</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+
+    <style>
+        /* --- PALETA DE COLORES "BAROQUE LUXURY" --- */
+        :root {
+            --lux-bg: #F9F5EB;          
+            --lux-gold: #C5A059;        
+            --lux-brown: #3E2723;       
+            --lux-tan: #E6D2B5;         
+            --lux-light-gold: #F3E5AB;  
+            
+            --facebook-color: #3b5998;
+            --instagram-gradient: linear-gradient(45deg, #C5A059 0%, #3E2723 100%);
+            --whatsapp-color: #25d366;
+        }
+
+        body { font-family: 'Lato', sans-serif; color: var(--lux-brown); background-color: var(--lux-bg); }
+        h1, h2, h3, h4 { color: var(--lux-brown); font-family: 'Cinzel', serif; font-weight: 700; }
+        .font-script { font-family: 'Great Vibes', cursive; color: var(--lux-gold); }
+
+        /* Navbar */
+        .navbar { background-color: rgba(249, 245, 235, 0.98); border-bottom: 1px solid var(--lux-gold); }
+        .navbar-brand { font-family: 'Cinzel', serif; font-weight: 700; color: var(--lux-brown) !important; font-size: 1.5rem; letter-spacing: 1px; }
+        .nav-link { color: var(--lux-brown) !important; font-weight: 400; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
+
+        /* Hero */
+        .hero { background: linear-gradient(180deg, var(--lux-tan) 0%, var(--lux-bg) 100%); padding: 120px 0; border-bottom: 1px solid var(--lux-gold); }
+
+        /* Servicios */
+        .service-card { border: 1px solid var(--lux-tan); border-radius: 8px; transition: all 0.4s ease; background-color: #fff; overflow: hidden; height: 100%; }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(62, 39, 35, 0.15); border-color: var(--lux-gold); }
+        .icon-box { width: 80px; height: 80px; background-color: var(--lux-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; border: 1px solid var(--lux-gold); }
+        .price-tag { background-color: var(--lux-brown); padding: 8px 20px; border-radius: 0; font-weight: bold; color: var(--lux-gold); display: inline-block; margin-top: auto; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; }
+        .price-extra { background-color: #fff; color: var(--lux-brown); border: 1px solid var(--lux-brown); }
+
+        /* Admin */
+        #adminPanel { display: none; background-color: #fff; border-top: 3px solid var(--lux-brown); }
+
+        /* Estilos Personalizados para FullCalendar */
+        .fc-toolbar-title { font-family: 'Cinzel', serif !important; color: var(--lux-brown); }
+        .fc-button-primary { background-color: var(--lux-brown) !important; border-color: var(--lux-brown) !important; border-radius: 0 !important; text-transform: uppercase; }
+        .fc-button-primary:hover { background-color: var(--lux-gold) !important; border-color: var(--lux-gold) !important; }
+        .fc-daygrid-day-number { color: var(--lux-brown); font-weight: bold; }
+        .fc-col-header-cell-cushion { color: var(--lux-brown); text-transform: uppercase; }
+        .fc-event { border: none !important; border-radius: 0 !important; font-family: 'Lato', sans-serif; font-size: 0.85rem; cursor: pointer; }
+        /* Citas Confirmadas (Dorado) */
+        .evento-confirmado { background-color: var(--lux-gold) !important; color: #fff !important; border-left: 3px solid var(--lux-brown) !important; }
+
+        /* Contacto */
+        .contact-info-card { background: white; border: 1px solid var(--lux-tan); padding: 30px; height: 100%; }
+        .social-btn { width: 45px; height: 45px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: white; margin-right: 10px; text-decoration: none; transition: transform 0.2s; }
+        .social-btn:hover { transform: scale(1.1); color: white; }
+        .bg-facebook { background-color: var(--facebook-color); }
+        .bg-instagram { background: var(--instagram-gradient); }
+        .bg-whatsapp { background-color: var(--whatsapp-color); }
+        .map-container { border: 1px solid var(--lux-gold); padding: 5px; background: white; height: 400px; }
+
+        footer { background-color: var(--lux-brown); color: var(--lux-tan); padding: 50px 0; margin-top: 50px; }
+
+        /* UI Elements */
+        .btn-luxury { background-color: var(--lux-brown); color: var(--lux-gold); border: 1px solid var(--lux-brown); border-radius: 2px; padding: 12px 35px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; transition: all 0.3s; }
+        .btn-luxury:hover { background-color: transparent; color: var(--lux-brown); }
+        .form-control, .form-select { border: 1px solid var(--lux-tan); background-color: #fff; border-radius: 2px; padding: 12px; }
+        .form-control:focus { border-color: var(--lux-gold); box-shadow: none; }
+        
+        .nav-tabs .nav-link { color: var(--lux-brown); border-radius: 0; }
+        .nav-tabs .nav-link.active { background-color: var(--lux-brown); color: var(--lux-gold) !important; border-color: var(--lux-brown); }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-crown me-2 text-warning"></i>Sahily Oropeza</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#ubicacion">Ubicación</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contacto">Citas</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-sm btn-outline-dark ms-3 px-3" href="#" data-bs-toggle="modal" data-bs-target="#loginModal" id="loginLink" style="border-radius:0;">
+                            <i class="fas fa-lock"></i>
+                        </a>
+                        <a class="nav-link btn btn-sm btn-outline-danger ms-3 px-3" href="#" id="logoutBtn" style="display:none; border-radius:0;">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="inicio" class="hero text-center">
+        <div class="container">
+            <h2 class="font-script display-3 mb-2">Arte & Elegancia</h2>
+            <h1 class="display-2 mb-4">ESTUDIO DE UÑAS</h1>
+            <div style="width: 100px; height: 2px; background: var(--lux-brown); margin: 0 auto 30px auto;"></div>
+            <p class="lead mb-5" style="color: var(--lux-brown);">Experiencia exclusiva para el cuidado de tus manos.</p>
+            <a href="#contacto" class="btn btn-luxury shadow">Reservar Cita</a>
+        </div>
+    </section>
+
+    <section id="adminPanel" class="py-5">
+        <div class="container">
+            <div class="row align-items-center mb-4">
+                <div class="col-md-8">
+                    <h3><i class="fas fa-database me-2" style="color: var(--lux-gold);"></i> Panel de Control</h3>
+                    <p class="text-muted">Gestión de citas en tiempo real.</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <span class="badge bg-success p-2 rounded-0">Sistema Online</span>
+                </div>
+            </div>
+
+            <ul class="nav nav-tabs mb-4" id="adminTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="listado-tab" data-bs-toggle="tab" data-bs-target="#listado" type="button" role="tab"><i class="fas fa-list me-2"></i>Listado</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="calendario-tab" data-bs-toggle="tab" data-bs-target="#calendarioPanel" type="button" role="tab"><i class="fas fa-calendar-alt me-2"></i>Calendario</button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="adminTabContent">
+                <div class="tab-pane fade show active" id="listado" role="tabpanel">
+                    <div class="table-responsive bg-white p-4 border border-1">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Cliente</th>
+                                    <th>Teléfono</th>
+                                    <th>Servicio</th>
+                                    <th>Fecha/Hora</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaCitasBody">
+                                <tr><td colspan="6" class="text-center text-muted">Cargando datos...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="calendarioPanel" role="tabpanel">
+                    <div class="bg-white p-4 border border-1">
+                        <div id="calendar"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="servicios" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="font-script mb-0">Nuestro Menú</h2>
+                <h3 class="mb-3">Servicios Exclusivos</h3>
+                <div style="width: 60px; height: 1px; background: var(--lux-gold); margin: 0 auto;"></div>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4 col-sm-6"><div class="card service-card p-4 text-center"><div class="card-body d-flex flex-column align-items-center"><div class="icon-box"><i class="fas fa-gem fa-2x" style="color: var(--lux-brown);"></i></div><h4 class="card-title h5">Aplicación Permanente</h4><span class="price-tag mt-auto">$250 MXN</span></div></div></div>
+                <div class="col-md-4 col-sm-6"><div class="card service-card p-4 text-center" style="background-color: #FDFBF7;"><div class="card-body d-flex flex-column align-items-center"><div class="icon-box"><i class="fas fa-paint-brush fa-2x" style="color: var(--lux-brown);"></i></div><h4 class="card-title h5">Uñas Acrílicas</h4><span class="price-tag mt-auto">$350 MXN</span></div></div></div>
+                <div class="col-md-4 col-sm-6"><div class="card service-card p-4 text-center" style="background-color: var(--lux-bg);"><div class="card-body d-flex flex-column align-items-center"><div class="icon-box"><i class="fas fa-hand-sparkles fa-2x" style="color: var(--lux-brown);"></i></div><h4 class="card-title h5">Kappin Polygel</h4><span class="price-tag mt-auto">$300 MXN</span></div></div></div>
+                <div class="col-md-4 col-sm-6"><div class="card service-card p-4 text-center" style="background-color: #fff;"><div class="card-body d-flex flex-column align-items-center"><div class="icon-box"><i class="fas fa-spa fa-2x" style="color: var(--lux-brown);"></i></div><h4 class="card-title h5">Limpieza Profunda</h4><span class="price-tag mt-auto">$450 MXN</span></div></div></div>
+                <div class="col-md-4 col-sm-6"><div class="card service-card p-4 text-center" style="border: 1px dashed var(--lux-brown);"><div class="card-body d-flex flex-column align-items-center"><div class="icon-box" style="border-style: dashed;"><i class="fas fa-feather-alt fa-2x" style="color: var(--lux-gold);"></i></div><h4 class="card-title h5">Técnica del Hilo</h4><span class="price-tag price-extra mt-auto">+$60 Extra</span></div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ubicacion" class="py-5" style="background-color: #fff;">
+        <div class="container">
+            <div class="text-center mb-5"><h2 class="font-script mb-0">Visítanos</h2><h3>Nuestra Ubicación</h3></div>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="contact-info-card">
+                        <h4 class="mb-4 text-uppercase" style="letter-spacing: 2px;">Sahily Oropeza</h4>
+                        <div class="d-flex align-items-center mb-3"><i class="fas fa-map-marker-alt fa-lg me-3" style="width:25px; color: var(--lux-brown);"></i><span>Av. Paseo Tabasco 2000,<br>Villahermosa, Tabasco.</span></div>
+                        <div class="d-flex align-items-center mb-3"><i class="fas fa-phone-alt fa-lg me-3" style="width:25px; color: var(--lux-gold);"></i><span>(993) 123-4567</span></div>
+                        <div class="mt-4 pt-4 border-top">
+                            <h5 class="mb-3 fs-6">REDES SOCIALES</h5>
+                            <div><a href="#" class="social-btn bg-facebook"><i class="fab fa-facebook-f"></i></a><a href="#" class="social-btn bg-instagram"><i class="fab fa-instagram"></i></a><a href="#" class="social-btn bg-whatsapp"><i class="fab fa-whatsapp"></i></a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8"><div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3794.8878566276847!2d-92.93868668511644!3d17.98565708772322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85ee771bd9e62e15%3A0x8e5b4b122618063a!2sTabasco%202000%2C%2086035%20Villahermosa%2C%20Tab.!5e0!3m2!1ses-419!2smx!4v1680000000000!5m2!1ses-419!2smx" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="py-5" style="background-color: var(--lux-bg);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <h2 class="mb-2">Reserva tu Cita</h2>
+                    <p class="mb-5 text-muted">Selecciona tu horario ideal. Elegancia y puntualidad.</p>
+                    <form id="formCita">
+                        <div class="row g-3">
+                            <div class="col-md-6"><input type="text" id="inputNombre" class="form-control" placeholder="Nombre Completo" required></div>
+                            <div class="col-md-6"><input type="tel" id="inputTel" class="form-control" placeholder="Teléfono" required></div>
+                            <div class="col-md-6">
+                                <label class="form-label text-start d-block text-muted small text-uppercase">Fecha deseada</label>
+                                <input type="date" id="inputFecha" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label text-start d-block text-muted small text-uppercase">Hora (10am - 8pm)</label>
+                                <input type="time" id="inputHora" class="form-control" min="10:00" max="20:00" required>
+                            </div>
+                            <div class="col-12">
+                                <select id="inputServicio" class="form-select">
+                                    <option value="" selected>SELECCIONA UN SERVICIO...</option>
+                                    <option value="Aplicación Permanente">Aplicación Permanente ($250)</option>
+                                    <option value="Uñas Acrílicas">Uñas Acrílicas ($350)</option>
+                                    <option value="Kappin Polygel">Kappin Polygel ($300)</option>
+                                    <option value="Limpieza Profunda">Limpieza Profunda ($450)</option>
+                                    <option value="Técnica del Hilo">Técnica del Hilo (+$60)</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mt-4"><button type="button" class="btn btn-luxury w-100" id="btnEnviarCita">Verificar Disponibilidad y Reservar</button></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center">
+        <div class="container">
+            <h4 class="text-white mb-3" style="color: var(--lux-tan);">Sahily Oropeza</h4>
+            <p class="mb-0 small text-uppercase" style="letter-spacing: 2px;">© 2023 Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-0">
+                <div class="modal-header bg-white border-bottom-0"><h5 class="modal-title text-uppercase">Acceso Admin</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body">
+                    <div id="loginAlert" class="alert alert-danger d-none">Error de credenciales.</div>
+                    <form><div class="mb-3"><label>Usuario</label><input type="text" class="form-control" id="username"></div><div class="mb-3"><label>Contraseña</label><input type="password" class="form-control" id="password"></div></form>
+                </div>
+                <div class="modal-footer border-0"><button type="button" class="btn btn-luxury w-100" id="btnIngresar">Entrar</button></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="statusModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center rounded-0">
+                <div class="modal-header border-0"><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body px-5 pb-5">
+                    <div id="statusIcon" class="mb-3"></div><h4 id="statusTitle" class="mb-3 fw-bold"></h4><p id="statusMessage" class="text-muted"></p>
+                    <button type="button" class="btn btn-luxury mt-3 px-4" data-bs-dismiss="modal">Entendido</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-0">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-success">Confirmar Cita</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <i class="fas fa-calendar-check fa-3x mb-3 text-success"></i>
+                    <p class="lead mb-0">¿Validar horario y <strong>enviar WhatsApp</strong>?</p>
+                </div>
+                <div class="modal-footer justify-content-center border-0 pb-4">
+                    <button type="button" class="btn btn-outline-secondary rounded-0 px-4" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-success rounded-0 px-4" id="btnConfirmarAccion">Sí, Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="rejectModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-0">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-danger">Rechazar Cita</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <i class="fas fa-times-circle fa-3x mb-3 text-danger"></i>
+                    <p class="lead mb-0">¿Rechazar esta cita y <strong>notificar por WhatsApp</strong>?</p>
+                </div>
+                <div class="modal-footer justify-content-center border-0 pb-4">
+                    <button type="button" class="btn btn-outline-secondary rounded-0 px-4" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger rounded-0 px-4" id="btnRechazarAccion">Sí, Rechazar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, updateDoc, getDocs, getDoc, where } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+
+        // --- ¡¡¡IMPORTANTE!!! PEGA AQUÍ TU CONFIGURACIÓN DE FIREBASE ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyBjf38KZSKTo4p3cDHT6mOeRYa2s4vZ128",
+            authDomain: "sahilynails.firebaseapp.com",
+            projectId: "sahilynails",
+            storageBucket: "sahilynails.firebasestorage.app",
+            messagingSenderId: "536647447552",
+            appId: "1:536647447552:web:07c72c373b81a43e6ed4e5",
+            measurementId: "G-CCH1XY8LMR"
+        };
+
+        // -------------------------------------------------------------
+
+        let app, db;
+        try {
+            app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            console.log("Firebase conectado.");
+        } catch (e) {
+            console.error("Error conectando Firebase.", e);
+        }
+
+        // --- CALENDAR INSTANCE GLOBAL ---
+        let calendarInstance = null;
+
+        function minutosDesdeMedianoche(horaStr) {
+            const partes = horaStr.split(':');
+            return (parseInt(partes[0]) * 60) + parseInt(partes[1]);
+        }
+
+        function minutosAHoraLegible(minutos) {
+            let h = Math.floor(minutos / 60);
+            let m = minutos % 60;
+            let ampm = h >= 12 ? 'PM' : 'AM';
+            h = h % 12;
+            if (h === 0) h = 12;
+            let mStr = m < 10 ? '0' + m : m;
+            return `${h}:${mStr} ${ampm}`;
+        }
+
+        function abrirWhatsApp(telefono, mensaje) {
+            let telLimpio = telefono.replace(/\D/g,'');
+            if(telLimpio.length === 10) telLimpio = '52' + telLimpio;
+            const url = `https://wa.me/${telLimpio}?text=${encodeURIComponent(mensaje)}`;
+            window.open(url, '_blank');
+        }
+
+        function mostrarMensaje(titulo, mensaje, iconoClass, colorClass) {
+            $('#statusTitle').text(titulo);
+            $('#statusMessage').html(mensaje);
+            let styleAttr = 'style="color: var(--lux-gold);"';
+            if(colorClass === "text-danger") styleAttr = 'style="color: #dc3545;"';
+            if(colorClass === "text-success") styleAttr = 'style="color: #198754;"';
+            $('#statusIcon').html(`<i class="${iconoClass} fa-4x" ${styleAttr}></i>`);
+            new bootstrap.Modal(document.getElementById('statusModal')).show();
+        }
+
+        $(document).ready(function() {
+            
+            const hoy = new Date().toISOString().split('T')[0];
+            document.getElementById("inputFecha").setAttribute('min', hoy);
+            let citaIdParaAccion = null; 
+
+            // CLIENTE: ENVIAR
+            $('#btnEnviarCita').click(async function() {
+                const nombre = $('#inputNombre').val().trim();
+                const tel = $('#inputTel').val().trim();
+                const fecha = $('#inputFecha').val(); 
+                const hora = $('#inputHora').val();   
+                const servicio = $('#inputServicio').val();
+
+                if(!nombre || !tel || !fecha || !hora || !servicio) {
+                    mostrarMensaje("Atención", "Por favor completa todos los campos.", "fas fa-exclamation-circle", "text-warning");
+                    return;
+                }
+
+                const duracionCitaMinutos = 180; 
+                const cierreNegocioMinutos = 1200; 
+                const minutosSolicitados = minutosDesdeMedianoche(hora);
+                
+                try {
+                    const q = query(
+                        collection(db, "citas"), 
+                        where("fechaSolo", "==", fecha),
+                        where("estado", "==", "Confirmada")
+                    );
+
+                    const querySnapshot = await getDocs(q);
+                    let citasDelDia = [];
+                    querySnapshot.forEach(doc => {
+                        let data = doc.data();
+                        citasDelDia.push({
+                            minutos: minutosDesdeMedianoche(data.horaSolo),
+                            ...data
+                        });
+                    });
+
+                    let hayConflicto = false;
+                    let citaConflictiva = null;
+
+                    for(let c of citasDelDia) {
+                        if (Math.abs(minutosSolicitados - c.minutos) < duracionCitaMinutos) {
+                            hayConflicto = true;
+                            citaConflictiva = c;
+                            break;
+                        }
+                    }
+
+                    if (hayConflicto) {
+                        let siguienteTurnoMinutos = citaConflictiva.minutos + duracionCitaMinutos;
+                        let mensajeSugerencia = "";
+                        if (siguienteTurnoMinutos > cierreNegocioMinutos) {
+                            mensajeSugerencia = "Horario no disponible hoy.<br><strong>Sugerencia: Mañana a las 10:00 AM</strong>";
+                        } else {
+                            let horaSugeridaStr = minutosAHoraLegible(siguienteTurnoMinutos);
+                            mensajeSugerencia = `Espacio ocupado.<br>Siguiente disponibilidad hoy: <br><strong class="fs-4" style="color:var(--lux-brown)">${horaSugeridaStr}</strong>`;
+                        }
+                        mostrarMensaje("Agenda Llena", mensajeSugerencia, "fas fa-clock", "text-danger");
+                        return; 
+                    }
+
+                    await addDoc(collection(db, "citas"), {
+                        cliente: nombre,
+                        telefono: tel,
+                        servicio: servicio,
+                        fechaSolo: fecha,  
+                        horaSolo: hora,    
+                        fechaCompleta: new Date(fecha + 'T' + hora), 
+                        estado: "Pendiente"
+                    });
+
+                    mostrarMensaje("Solicitud Enviada", "Horario provisionalmente reservado. Espera confirmación.", "fas fa-check-circle", "text-success");
+                    $('#formCita')[0].reset();
+
+                } catch (error) {
+                    console.error(error);
+                    mostrarMensaje("Error", "Error de conexión.", "fas fa-wifi", "text-danger");
+                }
+            });
+
+            // LOGIN
+            $('#btnIngresar').click(function() {
+                const u = $('#username').val();
+                const p = $('#password').val();
+                if(u === "admin" && p === "1234") { 
+                    bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
+                    $('#adminPanel').slideDown();
+                    $('#loginLink').hide();
+                    $('#logoutBtn').show();
+                    
+                    activarPanelAdmin(); 
+                    // Inicializar calendario al hacer login
+                    inicializarCalendario();
+
+                    mostrarMensaje("Bienvenida", "Sistema Activo.", "fas fa-user-check", "text-success");
+                } else {
+                    $('#loginAlert').removeClass('d-none');
+                }
+            });
+            $('#logoutBtn').click(function(e) { e.preventDefault(); location.reload(); });
+
+            // ADMIN PANEL LOGIC
+            function activarPanelAdmin() {
+                const q = query(collection(db, "citas"), orderBy("fechaCompleta", "desc"));
+                
+                onSnapshot(q, (snapshot) => {
+                    let html = '';
+                    let eventosCalendario = [];
+
+                    if (snapshot.empty) { html = '<tr><td colspan="6" class="text-center">No hay citas.</td></tr>'; } 
+                    else {
+                        snapshot.forEach((docSnap) => {
+                            const data = docSnap.data();
+                            const id = docSnap.id; 
+                            let fechaMostrar = data.fechaSolo + " " + data.horaSolo;
+                            
+                            let badgeClass = 'bg-warning text-dark';
+                            if(data.estado === 'Confirmada') badgeClass = 'bg-success';
+                            if(data.estado === 'Rechazada') badgeClass = 'bg-danger';
+
+                            // Botones
+                            let botonesAccion = '';
+                            if(data.estado === 'Pendiente') {
+                                botonesAccion = `
+                                    <div class="btn-group" role="group">
+                                        <button class="btn btn-sm btn-outline-success btn-confirmar-modal rounded-0" data-id="${id}" title="Confirmar"><i class="fas fa-check"></i></button>
+                                        <button class="btn btn-sm btn-outline-danger btn-rechazar-modal rounded-0" data-id="${id}" title="Rechazar"><i class="fas fa-trash-alt"></i></button>
+                                    </div>
+                                `;
+                            } else if (data.estado === 'Confirmada') {
+                                botonesAccion = '<span class="text-success small"><i class="fas fa-check-circle"></i> Confirmada</span>';
+                                
+                                // AGREGAR AL CALENDARIO SOLO LAS CONFIRMADAS
+                                eventosCalendario.push({
+                                    title: `${data.horaSolo} - ${data.cliente} (${data.servicio})`,
+                                    start: `${data.fechaSolo}T${data.horaSolo}`,
+                                    classNames: ['evento-confirmado']
+                                });
+
+                            } else {
+                                botonesAccion = '<span class="text-danger small"><i class="fas fa-times-circle"></i> Rechazada</span>';
+                            }
+
+                            html += `<tr>
+                                <td class="fw-bold">${data.cliente}</td>
+                                <td><a href="https://wa.me/52${data.telefono.replace(/\D/g,'')}" target="_blank" class="text-decoration-none text-success"><i class="fab fa-whatsapp"></i> ${data.telefono}</a></td>
+                                <td>${data.servicio}</td>
+                                <td class="small text-muted">${fechaMostrar}</td>
+                                <td><span class="badge ${badgeClass} rounded-0">${data.estado}</span></td>
+                                <td>${botonesAccion}</td>
+                            </tr>`;
+                        });
+                    }
+                    
+                    $('#tablaCitasBody').html(html);
+
+                    // ACTUALIZAR CALENDARIO SI YA EXISTE
+                    if(calendarInstance) {
+                        calendarInstance.removeAllEvents();
+                        calendarInstance.addEventSource(eventosCalendario);
+                    }
+                });
+            }
+
+            // FUNCIÓN INICIALIZAR CALENDARIO
+            function inicializarCalendario() {
+                var calendarEl = document.getElementById('calendar');
+                calendarInstance = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    locale: 'es',
+                    headerToolbar: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                    },
+                    buttonText: {
+                        today: 'Hoy',
+                        month: 'Mes',
+                        week: 'Semana',
+                        day: 'Día',
+                        list: 'Lista'
+                    },
+                    height: 650,
+                    expandRows: true
+                });
+                
+                // Renderizamos con un pequeño delay para asegurar que el tab sea visible o se ajuste
+                setTimeout(() => {
+                    calendarInstance.render();
+                }, 200);
+            }
+
+            // Fix para FullCalendar al cambiar de pestaña (Bootstrap tabs)
+            $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
+                if (e.target.id === 'calendario-tab' && calendarInstance) {
+                    calendarInstance.render();
+                }
+            });
+
+            // MODAL TRIGGERS
+            $(document).on('click', '.btn-confirmar-modal', function() {
+                citaIdParaAccion = $(this).data('id'); 
+                new bootstrap.Modal(document.getElementById('confirmModal')).show();
+            });
+
+            $(document).on('click', '.btn-rechazar-modal', function() {
+                citaIdParaAccion = $(this).data('id'); 
+                new bootstrap.Modal(document.getElementById('rejectModal')).show();
+            });
+
+            // CONFIRMAR + WHATSAPP
+            $('#btnConfirmarAccion').click(async function() {
+                if(!citaIdParaAccion) return;
+
+                try {
+                    const docRef = doc(db, "citas", citaIdParaAccion);
+                    const docSnap = await getDoc(docRef);
+                    const citaTarget = docSnap.data();
+
+                    if (!citaTarget) { alert("Error: Cita no encontrada"); return; }
+
+                    const minutosTarget = minutosDesdeMedianoche(citaTarget.horaSolo);
+                    
+                    const q = query(
+                        collection(db, "citas"),
+                        where("fechaSolo", "==", citaTarget.fechaSolo),
+                        where("estado", "==", "Confirmada")
+                    );
+                    const querySnapshot = await getDocs(q);
+                    let conflicto = false;
+                    let nombreConflicto = "";
+
+                    querySnapshot.forEach((doc) => {
+                        if(doc.id === citaIdParaAccion) return;
+                        const citaExistente = doc.data();
+                        const minutosExistente = minutosDesdeMedianoche(citaExistente.horaSolo);
+                        if(Math.abs(minutosTarget - minutosExistente) < 180) {
+                            conflicto = true;
+                            nombreConflicto = `${citaExistente.cliente} (${citaExistente.horaSolo})`;
+                        }
+                    });
+
+                    bootstrap.Modal.getInstance(document.getElementById('confirmModal')).hide();
+
+                    if (conflicto) {
+                        mostrarMensaje("Conflicto", `Choca con: <strong>${nombreConflicto}</strong>`, "fas fa-ban", "text-danger");
+                    } else {
+                        await updateDoc(docRef, { estado: "Confirmada" });
+                        const msg = `Hola ${citaTarget.cliente}, tu cita para *${citaTarget.servicio}* el día *${citaTarget.fechaSolo}* a las *${citaTarget.horaSolo}* ha sido CONFIRMADA en Sahily Oropeza Studio. ¡Te esperamos!`;
+                        abrirWhatsApp(citaTarget.telefono, msg);
+                        mostrarMensaje("Confirmado", "Cita validada y WhatsApp enviado.", "fas fa-check-double", "text-success");
+                    }
+                } catch (error) { console.error("Error", error); alert("Error al confirmar."); }
+            });
+
+            // RECHAZAR + WHATSAPP
+            $('#btnRechazarAccion').click(async function() {
+                if(!citaIdParaAccion) return;
+                try {
+                    const docRef = doc(db, "citas", citaIdParaAccion);
+                    const docSnap = await getDoc(docRef);
+                    const citaTarget = docSnap.data();
+
+                    await updateDoc(docRef, { estado: "Rechazada" });
+                    bootstrap.Modal.getInstance(document.getElementById('rejectModal')).hide();
+
+                    const msg = `Hola ${citaTarget.cliente}, lamentablemente no podemos confirmar tu cita para el ${citaTarget.fechaSolo} a las ${citaTarget.horaSolo}. Por favor contáctanos para reagendar. - Sahily Oropeza Studio`;
+                    abrirWhatsApp(citaTarget.telefono, msg);
+
+                    mostrarMensaje("Rechazada", "Cita rechazada y cliente notificado.", "fas fa-trash", "text-secondary");
+                } catch (error) { console.error("Error", error); alert("Error al rechazar."); }
+            });
+
+            $('a.nav-link[href^="#"]').on('click', function(event) {
+                var target = $(this.getAttribute('href'));
+                if( target.length ) { event.preventDefault(); $('html, body').stop().animate({ scrollTop: target.offset().top - 70 }, 1000); }
+            });
+        });
+    </script>
+</body>
+</html>
